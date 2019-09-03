@@ -182,6 +182,151 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-8-字符串转换整数-atoi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/03/8-字符串转换整数-atoi/">8.字符串转换整数 (atoi)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/03/8-字符串转换整数-atoi/" class="archive-article-date">
+  	<time datetime="2019-09-03T06:07:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="解题思路说明"><a href="#解题思路说明" class="headerlink" title="解题思路说明"></a>解题思路说明</h1><h2 id="题目地址"><a href="#题目地址" class="headerlink" title="题目地址"></a>题目地址</h2><p><a href="https://leetcode-cn.com/problems/string-to-integer-atoi/" target="_blank" rel="noopener">字符串转换整数 (atoi)</a></p>
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>在整个提取过程中有三个状态  </p>
+<ul>
+<li>初始状态：开始提取数字之前</li>
+<li>开始提取数字时</li>
+<li>提取数字中</li>
+</ul>
+<p>分别为三个状态编号为 0 1 2  </p>
+<p>得出状态行为表：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>当前字符</th>
+<th>Action（行为）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>空格</td>
+<td>do nothing</td>
+</tr>
+<tr>
+<td>0</td>
+<td>数字</td>
+<td>将状态标志置为状态3，进入状态3</td>
+</tr>
+<tr>
+<td>0</td>
+<td>+ -</td>
+<td>置符号，置状态标志为状态3</td>
+</tr>
+<tr>
+<td>0</td>
+<td>其它</td>
+<td>返回0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>do nothing</td>
+</tr>
+<tr>
+<td>1</td>
+<td>非0</td>
+<td>叠加数字变量，将状态标志置为状态2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>其它</td>
+<td>结束提取</td>
+</tr>
+<tr>
+<td>2</td>
+<td>数字</td>
+<td>叠加数字变量</td>
+</tr>
+<tr>
+<td>2</td>
+<td>非数字</td>
+<td>结束提取</td>
+</tr>
+</tbody></table>
+<p>在循环遍历字符串时，都是针对状态，来决定处理的逻辑<br>确认状态行为表后，使用switch case (Scala语言为match)判断字符，在使用if判断状态 (或者继续使用switch)，在将对应的Action放入对应的状态中。  </p>
+<p>状态行为表内容说明：    </p>
+<ul>
+<li><p>将状态标志置数与进入状态区别：将状态标志置数，直接将状态标志变量赋值。进入状态：将状态标志置数后，随即进入对应的状态中，具体的实现方法为（scala语言）将判断状态的模块根据进入的顺序来排布，例如，将判断状态0的if放到判断状态3的前面，这样在将状态标志置数后还能进入到状态3中。<br>如下中的FLAG_INIT和FLAG_NUM_START的位置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(flag == FLAG_INIT)&#123;</span><br><span class="line">    <span class="keyword">if</span>(index_char == <span class="string">'0'</span>)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    flag = FLAG_NUM_START;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(flag == FLAG_NUM)&#123;</span><br><span class="line">    num+=index_char;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(flag == FLAG_NUM_START)&#123;</span><br><span class="line">    <span class="keyword">if</span>(index_char == <span class="string">'0'</span>)&#123;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      num+=index_char;</span><br><span class="line"></span><br><span class="line">      flag = FLAG_NUM;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结束提取：返回已经提取到的数字（在getNumber函数中，根据数字字符串的长度，决定是否返回0。根据符号位，决定是正还是负）</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/leetcode//" class="article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/03/8-字符串转换整数-atoi/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-78-子集-subsets" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

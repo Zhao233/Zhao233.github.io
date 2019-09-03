@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>78.子集(subsets) | Everything Returns To Nothing</title>
+  <title>8.字符串转换整数 (atoi) | Everything Returns To Nothing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="解题思路说明题目地址子集 (subsets) 解题过程采用的方法为，将当前元素添加到已经保存的子集中，并将新的子集保存。 举例说明目标数据：1，2，3存储子集的介质：list    序号 遍历过程中，当前数字 生成的子集 说明     0 1 [1]    1 2 [1,2] [2]    2 3 [1,3] [1,2,3] [2,3] [3]   每一步在上述操作执行后，都将新生成的子集存入li">
+  <meta name="description" content="解题思路说明题目地址字符串转换整数 (atoi) 解题过程在整个提取过程中有三个状态    初始状态：开始提取数字之前 开始提取数字时 提取数字中  分别为三个状态编号为 0 1 2   得出状态行为表：    状态 当前字符 Action（行为）    0 空格 do nothing   0 数字 将状态标志置为状态3，进入状态3   0 + - 置符号，置状态标志为状态3   0 其它 返回0">
 <meta property="og:type" content="article">
-<meta property="og:title" content="78.子集(subsets)">
-<meta property="og:url" content="http://yoursite.com/2019/09/03/78-子集-subsets/index.html">
+<meta property="og:title" content="8.字符串转换整数 (atoi)">
+<meta property="og:url" content="http://yoursite.com/2019/09/03/8-字符串转换整数-atoi/index.html">
 <meta property="og:site_name" content="Everything Returns To Nothing">
-<meta property="og:description" content="解题思路说明题目地址子集 (subsets) 解题过程采用的方法为，将当前元素添加到已经保存的子集中，并将新的子集保存。 举例说明目标数据：1，2，3存储子集的介质：list    序号 遍历过程中，当前数字 生成的子集 说明     0 1 [1]    1 2 [1,2] [2]    2 3 [1,3] [1,2,3] [2,3] [3]   每一步在上述操作执行后，都将新生成的子集存入li">
+<meta property="og:description" content="解题思路说明题目地址字符串转换整数 (atoi) 解题过程在整个提取过程中有三个状态    初始状态：开始提取数字之前 开始提取数字时 提取数字中  分别为三个状态编号为 0 1 2   得出状态行为表：    状态 当前字符 Action（行为）    0 空格 do nothing   0 数字 将状态标志置为状态3，进入状态3   0 + - 置符号，置状态标志为状态3   0 其它 返回0">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-03T06:07:34.712Z">
+<meta property="og:updated_time" content="2019-09-03T06:09:01.665Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="78.子集(subsets)">
-<meta name="twitter:description" content="解题思路说明题目地址子集 (subsets) 解题过程采用的方法为，将当前元素添加到已经保存的子集中，并将新的子集保存。 举例说明目标数据：1，2，3存储子集的介质：list    序号 遍历过程中，当前数字 生成的子集 说明     0 1 [1]    1 2 [1,2] [2]    2 3 [1,3] [1,2,3] [2,3] [3]   每一步在上述操作执行后，都将新生成的子集存入li">
+<meta name="twitter:title" content="8.字符串转换整数 (atoi)">
+<meta name="twitter:description" content="解题思路说明题目地址字符串转换整数 (atoi) 解题过程在整个提取过程中有三个状态    初始状态：开始提取数字之前 开始提取数字时 提取数字中  分别为三个状态编号为 0 1 2   得出状态行为表：    状态 当前字符 Action（行为）    0 空格 do nothing   0 数字 将状态标志置为状态3，进入状态3   0 + - 置符号，置状态标志为状态3   0 其它 返回0">
   
     <link rel="alternative" href="/atom.xml" title="Everything Returns To Nothing" type="application/atom+xml">
   
@@ -184,67 +184,98 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-78-子集-subsets" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-8-字符串转换整数-atoi" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      78.子集(subsets)
+      8.字符串转换整数 (atoi)
     </h1>
   
 
         
-        <a href="/2019/09/03/78-子集-subsets/" class="archive-article-date">
-  	<time datetime="2019-09-03T06:00:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-03</time>
+        <a href="/2019/09/03/8-字符串转换整数-atoi/" class="archive-article-date">
+  	<time datetime="2019-09-03T06:07:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="解题思路说明"><a href="#解题思路说明" class="headerlink" title="解题思路说明"></a>解题思路说明</h1><h2 id="题目地址"><a href="#题目地址" class="headerlink" title="题目地址"></a>题目地址</h2><p><a href="https://leetcode-cn.com/problems/subsets/" target="_blank" rel="noopener">子集 (subsets)</a></p>
-<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>采用的方法为，将当前元素添加到已经保存的子集中，并将新的子集保存。</p>
-<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><p>目标数据：1，2，3<br>存储子集的介质：list</p>
+        <h1 id="解题思路说明"><a href="#解题思路说明" class="headerlink" title="解题思路说明"></a>解题思路说明</h1><h2 id="题目地址"><a href="#题目地址" class="headerlink" title="题目地址"></a>题目地址</h2><p><a href="https://leetcode-cn.com/problems/string-to-integer-atoi/" target="_blank" rel="noopener">字符串转换整数 (atoi)</a></p>
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>在整个提取过程中有三个状态  </p>
+<ul>
+<li>初始状态：开始提取数字之前</li>
+<li>开始提取数字时</li>
+<li>提取数字中</li>
+</ul>
+<p>分别为三个状态编号为 0 1 2  </p>
+<p>得出状态行为表：</p>
 <table>
 <thead>
 <tr>
-<th>序号</th>
-<th>遍历过程中，当前数字</th>
-<th>生成的子集</th>
-<th>说明</th>
+<th>状态</th>
+<th>当前字符</th>
+<th>Action（行为）</th>
 </tr>
 </thead>
 <tbody><tr>
-<td></td>
 <td>0</td>
-<td>1</td>
-<td>[1]</td>
+<td>空格</td>
+<td>do nothing</td>
 </tr>
 <tr>
-<td></td>
-<td>1</td>
-<td>2</td>
-<td>[1,2] [2]</td>
+<td>0</td>
+<td>数字</td>
+<td>将状态标志置为状态3，进入状态3</td>
 </tr>
 <tr>
-<td></td>
+<td>0</td>
+<td>+ -</td>
+<td>置符号，置状态标志为状态3</td>
+</tr>
+<tr>
+<td>0</td>
+<td>其它</td>
+<td>返回0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>do nothing</td>
+</tr>
+<tr>
+<td>1</td>
+<td>非0</td>
+<td>叠加数字变量，将状态标志置为状态2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>其它</td>
+<td>结束提取</td>
+</tr>
+<tr>
 <td>2</td>
-<td>3</td>
-<td>[1,3] [1,2,3] [2,3] [3]</td>
+<td>数字</td>
+<td>叠加数字变量</td>
+</tr>
+<tr>
+<td>2</td>
+<td>非数字</td>
+<td>结束提取</td>
 </tr>
 </tbody></table>
-<p>每一步在上述操作执行后，都将新生成的子集存入list中，遍历完数组后，再将空集[]加入list中，即得到目标数据的子集集合</p>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
-<li>需要先把自己加入到list的子集中，然后再将自己作为一个子集加入list</li>
-<li>空集需要单独加入</li>
-<li>当把自己放入list中存在的子集时，并不取代原来的子集，而是将list中的子集逐个取出，逐个存到一个临时变量里，然后将叠加后的临时变量逐个存回list</li>
-</ol>
-<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><ol>
-<li>使用这个方法解出来似乎很慢，而且很耗内存，看到过有2ms的解法，之后去研究一下</li>
-<li>这个题还可以用其它的方法解决，例如回溯法，递归法等，有必要进行研究，<a href="https://leetcode-cn.com/problems/subsets/solution/er-jin-zhi-wei-zhu-ge-mei-ju-dfssan-chong-si-lu-9c/" target="_blank" rel="noopener">其它的解法 (subsets)</a></li>
-</ol>
+<p>在循环遍历字符串时，都是针对状态，来决定处理的逻辑<br>确认状态行为表后，使用switch case (Scala语言为match)判断字符，在使用if判断状态 (或者继续使用switch)，在将对应的Action放入对应的状态中。  </p>
+<p>状态行为表内容说明：    </p>
+<ul>
+<li><p>将状态标志置数与进入状态区别：将状态标志置数，直接将状态标志变量赋值。进入状态：将状态标志置数后，随即进入对应的状态中，具体的实现方法为（scala语言）将判断状态的模块根据进入的顺序来排布，例如，将判断状态0的if放到判断状态3的前面，这样在将状态标志置数后还能进入到状态3中。<br>如下中的FLAG_INIT和FLAG_NUM_START的位置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(flag == FLAG_INIT)&#123;</span><br><span class="line">    <span class="keyword">if</span>(index_char == <span class="string">'0'</span>)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    flag = FLAG_NUM_START;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(flag == FLAG_NUM)&#123;</span><br><span class="line">    num+=index_char;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(flag == FLAG_NUM_START)&#123;</span><br><span class="line">    <span class="keyword">if</span>(index_char == <span class="string">'0'</span>)&#123;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      num+=index_char;</span><br><span class="line"></span><br><span class="line">      flag = FLAG_NUM;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结束提取：返回已经提取到的数字（在getNumber函数中，根据数字字符串的长度，决定是否返回0。根据符号位，决定是正还是负）</p>
+</li>
+</ul>
 
       
 
@@ -335,7 +366,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/03/78-子集-subsets/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/03/8-字符串转换整数-atoi/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -349,15 +380,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/03/8-字符串转换整数-atoi/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          8.字符串转换整数 (atoi)
-        
-      </div>
-    </a>
   
+    <a href="/2019/09/03/78-子集-subsets/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">78.子集(subsets)</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
