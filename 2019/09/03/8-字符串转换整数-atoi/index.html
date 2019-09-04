@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>8.字符串转换整数 (atoi) | Everything Returns To Nothing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="解题思路说明题目地址字符串转换整数 (atoi) 解题过程在整个提取过程中有三个状态    初始状态：开始提取数字之前 开始提取数字时 提取数字中  分别为三个状态编号为 0 1 2   得出状态行为表：    状态 当前字符 Action（行为）    0 空格 do nothing   0 数字 将状态标志置为状态3，进入状态3   0 + - 置符号，置状态标志为状态3   0 其它 返回0">
+  <meta name="description" content="解题思路说明题目要求太长了,,,从题目地址中自己看一下吧233333 题目地址字符串转换整数 (atoi) 解题过程在整个提取过程中有三个状态    初始状态：开始提取数字之前  开始提取数字时  提取数字中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="8.字符串转换整数 (atoi)">
 <meta property="og:url" content="http://yoursite.com/2019/09/03/8-字符串转换整数-atoi/index.html">
 <meta property="og:site_name" content="Everything Returns To Nothing">
-<meta property="og:description" content="解题思路说明题目地址字符串转换整数 (atoi) 解题过程在整个提取过程中有三个状态    初始状态：开始提取数字之前 开始提取数字时 提取数字中  分别为三个状态编号为 0 1 2   得出状态行为表：    状态 当前字符 Action（行为）    0 空格 do nothing   0 数字 将状态标志置为状态3，进入状态3   0 + - 置符号，置状态标志为状态3   0 其它 返回0">
+<meta property="og:description" content="解题思路说明题目要求太长了,,,从题目地址中自己看一下吧233333 题目地址字符串转换整数 (atoi) 解题过程在整个提取过程中有三个状态    初始状态：开始提取数字之前  开始提取数字时  提取数字中">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-03T06:09:01.665Z">
+<meta property="og:updated_time" content="2019-09-04T06:06:13.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8.字符串转换整数 (atoi)">
-<meta name="twitter:description" content="解题思路说明题目地址字符串转换整数 (atoi) 解题过程在整个提取过程中有三个状态    初始状态：开始提取数字之前 开始提取数字时 提取数字中  分别为三个状态编号为 0 1 2   得出状态行为表：    状态 当前字符 Action（行为）    0 空格 do nothing   0 数字 将状态标志置为状态3，进入状态3   0 + - 置符号，置状态标志为状态3   0 其它 返回0">
+<meta name="twitter:description" content="解题思路说明题目要求太长了,,,从题目地址中自己看一下吧233333 题目地址字符串转换整数 (atoi) 解题过程在整个提取过程中有三个状态    初始状态：开始提取数字之前  开始提取数字时  提取数字中">
   
     <link rel="alternative" href="/atom.xml" title="Everything Returns To Nothing" type="application/atom+xml">
   
@@ -204,12 +204,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="解题思路说明"><a href="#解题思路说明" class="headerlink" title="解题思路说明"></a>解题思路说明</h1><h2 id="题目地址"><a href="#题目地址" class="headerlink" title="题目地址"></a>题目地址</h2><p><a href="https://leetcode-cn.com/problems/string-to-integer-atoi/" target="_blank" rel="noopener">字符串转换整数 (atoi)</a></p>
+        <h1 id="解题思路说明"><a href="#解题思路说明" class="headerlink" title="解题思路说明"></a>解题思路说明</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>太长了,,,从题目地址中自己看一下吧233333</p>
+<h2 id="题目地址"><a href="#题目地址" class="headerlink" title="题目地址"></a>题目地址</h2><p><a href="https://leetcode-cn.com/problems/string-to-integer-atoi/" target="_blank" rel="noopener">字符串转换整数 (atoi)</a></p>
 <h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>在整个提取过程中有三个状态  </p>
 <ul>
-<li>初始状态：开始提取数字之前</li>
-<li>开始提取数字时</li>
-<li>提取数字中</li>
+<li><p>初始状态：开始提取数字之前</p>
+</li>
+<li><p>开始提取数字时</p>
+</li>
+<li><p>提取数字中</p>
+<a id="more"></a>
+
+</li>
 </ul>
 <p>分别为三个状态编号为 0 1 2  </p>
 <p>得出状态行为表：</p>
