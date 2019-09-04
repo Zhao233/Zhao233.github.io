@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Everything Returns To Nothing">
 <meta property="og:description" content="注:   在文章中 zookeeper简写为zk  zk简介zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例如命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-04T12:02:30.111Z">
+<meta property="og:updated_time" content="2019-09-04T12:13:46.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper学习笔记">
 <meta name="twitter:description" content="注:   在文章中 zookeeper简写为zk  zk简介zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例如命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.">
@@ -67,7 +67,7 @@
 	        
 				<li><a href="/categories/bigData">大数据</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/categories/something">随笔</a></li>
 	        
 				<li><a href="/categories/favorite">收藏夹</a></li>
 	        
@@ -167,7 +167,7 @@
 		        
 					<li style="width: 14.285714285714286%"><a href="/categories/bigData">大数据</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 14.285714285714286%"><a href="/categories/something">随笔</a></li>
 		        
 					<li style="width: 14.285714285714286%"><a href="/categories/favorite">收藏夹</a></li>
 		        
@@ -226,7 +226,12 @@
 </li>
 </ul>
 <p>ZooKeeper is a high-performance coordination service for distributed applications. It exposes common services - such as naming, configuration management, synchronization, and group services - in a simple interface so you don’t have to write them from scratch. You can use it off-the-shelf to implement consensus, group management, leader election, and presence protocols. And you can build on it for your own, specific needs.</p>
-<h2 id="zk的应用场景-以及作用"><a href="#zk的应用场景-以及作用" class="headerlink" title="zk的应用场景,以及作用"></a>zk的应用场景,以及作用</h2><h2 id="zk的大致架构-核心组件"><a href="#zk的大致架构-核心组件" class="headerlink" title="zk的大致架构,核心组件"></a>zk的大致架构,核心组件</h2><h2 id="使用zk实现的功能"><a href="#使用zk实现的功能" class="headerlink" title="使用zk实现的功能"></a>使用zk实现的功能</h2><h2 id="设计技术名词"><a href="#设计技术名词" class="headerlink" title="设计技术名词"></a>设计技术名词</h2>
+<h2 id="zk的应用场景-以及作用"><a href="#zk的应用场景-以及作用" class="headerlink" title="zk的应用场景,以及作用"></a>zk的应用场景,以及作用</h2><h2 id="zk的大致架构-核心组件"><a href="#zk的大致架构-核心组件" class="headerlink" title="zk的大致架构,核心组件"></a>zk的大致架构,核心组件</h2><h2 id="使用zk实现的功能"><a href="#使用zk实现的功能" class="headerlink" title="使用zk实现的功能"></a>使用zk实现的功能</h2><h2 id="涉及技术名词"><a href="#涉及技术名词" class="headerlink" title="涉及技术名词"></a>涉及技术名词</h2><ol>
+<li>FLP impossibillity</li>
+<li>total order / partial order / causal order</li>
+<li>CAP定理</li>
+</ol>
+
       
 
       
@@ -329,6 +334,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/09/04/名词解释/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          名词解释
+        
+      </div>
+    </a>
   
   
     <a href="/2019/09/04/746-使用最小花费爬楼梯/" id="article-nav-older" class="article-nav-link-wrap">
