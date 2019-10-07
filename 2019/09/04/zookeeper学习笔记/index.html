@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Everything Returns To Nothing">
 <meta property="og:description" content="注:   在文章中 zookeeper简写为zk  zk简介zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例如命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-04T12:13:46.632Z">
+<meta property="og:updated_time" content="2019-10-07T11:08:16.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper学习笔记">
 <meta name="twitter:description" content="注:   在文章中 zookeeper简写为zk  zk简介zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例如命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.">
@@ -232,7 +232,87 @@
 </li>
 </ul>
 <p>ZooKeeper is a high-performance coordination service for distributed applications. It exposes common services - such as naming, configuration management, synchronization, and group services - in a simple interface so you don’t have to write them from scratch. You can use it off-the-shelf to implement consensus, group management, leader election, and presence protocols. And you can build on it for your own, specific needs.</p>
-<h2 id="zk的应用场景-以及作用"><a href="#zk的应用场景-以及作用" class="headerlink" title="zk的应用场景,以及作用"></a>zk的应用场景,以及作用</h2><h2 id="zk的大致架构-核心组件"><a href="#zk的大致架构-核心组件" class="headerlink" title="zk的大致架构,核心组件"></a>zk的大致架构,核心组件</h2><h2 id="使用zk实现的功能"><a href="#使用zk实现的功能" class="headerlink" title="使用zk实现的功能"></a>使用zk实现的功能</h2><h2 id="涉及技术名词"><a href="#涉及技术名词" class="headerlink" title="涉及技术名词"></a>涉及技术名词</h2><ol>
+<h2 id="zk的应用场景-以及作用"><a href="#zk的应用场景-以及作用" class="headerlink" title="zk的应用场景,以及作用"></a>zk的应用场景,以及作用</h2><h2 id="zk的大致架构-核心组件"><a href="#zk的大致架构-核心组件" class="headerlink" title="zk的大致架构,核心组件"></a>zk的大致架构,核心组件</h2><h2 id="使用zk实现的功能"><a href="#使用zk实现的功能" class="headerlink" title="使用zk实现的功能"></a>使用zk实现的功能</h2><h3 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h3><ol>
+<li><p>API<br>public String create(final String path, byte data[], List<acl> acl, CreateMode createMode)  </acl></p>
+<p> 参数说明:  </p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>path</td>
+<td>String</td>
+<td>创建节点的路径</td>
+</tr>
+<tr>
+<td>1</td>
+<td>data</td>
+<td>byte[]</td>
+<td>创建节点的初始化数据</td>
+</tr>
+<tr>
+<td>2</td>
+<td>acl</td>
+<td>List<acl></acl></td>
+<td>节点的ACL策略</td>
+</tr>
+<tr>
+<td>3</td>
+<td>createMode</td>
+<td>CreateMode</td>
+<td>节点类型(持久,持久顺序,临时,临时顺序)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>返回值</td>
+<td>String</td>
+<td>返回创建后的路径</td>
+</tr>
+</tbody></table>
+<p> 节点类型说明  </p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>节点类型名</th>
+<th>节点字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>持久</td>
+<td>PERSISTENT</td>
+<td>持久节点永久存在</td>
+</tr>
+<tr>
+<td>1</td>
+<td>持久顺序</td>
+<td>PERSISTENT_SEQUENTIAL</td>
+<td>除了生成节点,还会在节点名称后生成编号</td>
+</tr>
+<tr>
+<td>2</td>
+<td>临时</td>
+<td>EPHEMERAL</td>
+<td>当连接断开后,删除创建的节点</td>
+</tr>
+<tr>
+<td>3</td>
+<td>临时顺序</td>
+<td>EPHEMERAL_SEQUENTIAL</td>
+<td>同持久顺序节点</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="监听节点"><a href="#监听节点" class="headerlink" title="监听节点"></a>监听节点</h3><h2 id="涉及技术名词"><a href="#涉及技术名词" class="headerlink" title="涉及技术名词"></a>涉及技术名词</h2><ol>
 <li>FLP impossibillity</li>
 <li>total order / partial order / causal order</li>
 <li>CAP定理</li>
