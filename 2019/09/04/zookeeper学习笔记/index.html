@@ -8,17 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>zookeeper学习笔记 | Everything Returns To Nothing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="注:   在文章中 zookeeper简写为zk  zk简介zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例如命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.">
+  <meta name="description" content="注:   在文章中 zookeeper简写为zk  zk简介 zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="zookeeper学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/09/04/zookeeper学习笔记/index.html">
 <meta property="og:site_name" content="Everything Returns To Nothing">
-<meta property="og:description" content="注:   在文章中 zookeeper简写为zk  zk简介zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例如命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.">
+<meta property="og:description" content="注:   在文章中 zookeeper简写为zk  zk简介 zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-07T11:08:16.366Z">
+<meta property="og:image" content="http://static.open-open.com/lib/uploadImg/20141108/20141108213344_45.png">
+<meta property="og:updated_time" content="2019-10-08T08:32:29.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper学习笔记">
-<meta name="twitter:description" content="注:   在文章中 zookeeper简写为zk  zk简介zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例如命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.">
+<meta name="twitter:description" content="注:   在文章中 zookeeper简写为zk  zk简介 zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.">
+<meta name="twitter:image" content="http://static.open-open.com/lib/uploadImg/20141108/20141108213344_45.png">
   
     <link rel="alternative" href="/atom.xml" title="Everything Returns To Nothing" type="application/atom+xml">
   
@@ -214,7 +216,9 @@
 <ol>
 <li>在文章中 zookeeper简写为zk</li>
 </ol>
-<h2 id="zk简介"><a href="#zk简介" class="headerlink" title="zk简介"></a>zk简介</h2><p>zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例如命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能. </p>
+<h2 id="zk简介"><a href="#zk简介" class="headerlink" title="zk简介"></a>zk简介</h2><ol>
+<li>zk是一个高性能的分布式应用协调服务.它通过一个简单的接口去阐明了一些共有的服务,例命名服务,配置管理,分布式并行,集群服务,所以不需要再去从头实现这些功能.   </li>
+</ol>
 <a id="more"></a>
 <ul>
 <li><p>注:     </p>
@@ -231,88 +235,154 @@
 </ul>
 </li>
 </ul>
-<p>ZooKeeper is a high-performance coordination service for distributed applications. It exposes common services - such as naming, configuration management, synchronization, and group services - in a simple interface so you don’t have to write them from scratch. You can use it off-the-shelf to implement consensus, group management, leader election, and presence protocols. And you can build on it for your own, specific needs.</p>
-<h2 id="zk的应用场景-以及作用"><a href="#zk的应用场景-以及作用" class="headerlink" title="zk的应用场景,以及作用"></a>zk的应用场景,以及作用</h2><h2 id="zk的大致架构-核心组件"><a href="#zk的大致架构-核心组件" class="headerlink" title="zk的大致架构,核心组件"></a>zk的大致架构,核心组件</h2><h2 id="使用zk实现的功能"><a href="#使用zk实现的功能" class="headerlink" title="使用zk实现的功能"></a>使用zk实现的功能</h2><h3 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h3><ol>
-<li><p>API<br>public String create(final String path, byte data[], List<acl> acl, CreateMode createMode)  </acl></p>
-<p> 参数说明:  </p>
-<table>
+<ol start="2">
+<li>zk=文件系统+通知机制<ul>
+<li>文件系统<br><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213344_45.png" alt="zookeeper文件结构"><br>每个子目录都称为znode,并且znode内部可以存储数据<br>节点类型说明  <table>
 <thead>
 <tr>
-<th>序号</th>
-<th>参数名</th>
-<th>类型</th>
-<th>说明</th>
+<th align="center">序号</th>
+<th align="center">节点类型名</th>
+<th align="center">节点字段</th>
+<th align="center">说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>0</td>
-<td>path</td>
-<td>String</td>
-<td>创建节点的路径</td>
+<td align="center">0</td>
+<td align="center">持久</td>
+<td align="center">PERSISTENT</td>
+<td align="center">持久节点永久存在</td>
 </tr>
 <tr>
-<td>1</td>
-<td>data</td>
-<td>byte[]</td>
-<td>创建节点的初始化数据</td>
+<td align="center">1</td>
+<td align="center">持久顺序</td>
+<td align="center">PERSISTENT_SEQUENTIAL</td>
+<td align="center">除了生成节点,还会在节点名称后生成编号</td>
 </tr>
 <tr>
-<td>2</td>
-<td>acl</td>
-<td>List<acl></acl></td>
-<td>节点的ACL策略</td>
+<td align="center">2</td>
+<td align="center">临时</td>
+<td align="center">EPHEMERAL</td>
+<td align="center">当连接断开后,删除创建的节点</td>
 </tr>
 <tr>
-<td>3</td>
-<td>createMode</td>
-<td>CreateMode</td>
-<td>节点类型(持久,持久顺序,临时,临时顺序)</td>
-</tr>
-<tr>
-<td>4</td>
-<td>返回值</td>
-<td>String</td>
-<td>返回创建后的路径</td>
+<td align="center">3</td>
+<td align="center">临时顺序</td>
+<td align="center">EPHEMERAL_SEQUENTIAL</td>
+<td align="center">同持久顺序节点</td>
 </tr>
 </tbody></table>
-<p> 节点类型说明  </p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>通知机制<br>当客户端注册一个节点的监听事件后,当该节点发生变化(数据改变,删除,子节点的增加删除),客户端会收到zk的通知</li>
+</ul>
+<h2 id="zk的应用场景-以及作用"><a href="#zk的应用场景-以及作用" class="headerlink" title="zk的应用场景,以及作用"></a>zk的应用场景,以及作用</h2><h2 id="zk的大致架构-核心组件"><a href="#zk的大致架构-核心组件" class="headerlink" title="zk的大致架构,核心组件"></a>zk的大致架构,核心组件</h2><h2 id="使用zk实现的功能"><a href="#使用zk实现的功能" class="headerlink" title="使用zk实现的功能"></a>使用zk实现的功能</h2><h3 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h3><ol>
+<li><p>API   </p>
+<p> public String create(final String path, byte data[], List<acl> acl, CreateMode createMode)  </acl></p>
+<p> 参数说明:   </p>
 <table>
 <thead>
 <tr>
-<th>序号</th>
-<th>节点类型名</th>
-<th>节点字段</th>
-<th>说明</th>
+<th align="center">序号</th>
+<th align="center">参数名</th>
+<th align="center">类型</th>
+<th align="center">说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>0</td>
-<td>持久</td>
-<td>PERSISTENT</td>
-<td>持久节点永久存在</td>
+<td align="center">0</td>
+<td align="center">path</td>
+<td align="center">String</td>
+<td align="center">创建节点的路径</td>
 </tr>
 <tr>
-<td>1</td>
-<td>持久顺序</td>
-<td>PERSISTENT_SEQUENTIAL</td>
-<td>除了生成节点,还会在节点名称后生成编号</td>
+<td align="center">1</td>
+<td align="center">data</td>
+<td align="center">byte[]</td>
+<td align="center">创建节点的初始化数据</td>
 </tr>
 <tr>
-<td>2</td>
-<td>临时</td>
-<td>EPHEMERAL</td>
-<td>当连接断开后,删除创建的节点</td>
+<td align="center">2</td>
+<td align="center">acl</td>
+<td align="center">List<acl></acl></td>
+<td align="center">节点的ACL策略</td>
 </tr>
 <tr>
-<td>3</td>
-<td>临时顺序</td>
-<td>EPHEMERAL_SEQUENTIAL</td>
-<td>同持久顺序节点</td>
+<td align="center">3</td>
+<td align="center">createMode</td>
+<td align="center">CreateMode</td>
+<td align="center">节点类型(持久,持久顺序,临时,临时顺序)</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">返回值</td>
+<td align="center">String</td>
+<td align="center">返回创建后的路径</td>
 </tr>
 </tbody></table>
 </li>
 </ol>
-<h3 id="监听节点"><a href="#监听节点" class="headerlink" title="监听节点"></a>监听节点</h3><h2 id="涉及技术名词"><a href="#涉及技术名词" class="headerlink" title="涉及技术名词"></a>涉及技术名词</h2><ol>
+<ol start="2">
+<li>代码实现<br>String path = zk.create(“/zk-test”, “”.getBytes(),             ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL,);</li>
+</ol>
+<h3 id="监听节点"><a href="#监听节点" class="headerlink" title="监听节点"></a>监听节点</h3><ol>
+<li><p>API<br>public Stat exists(final String path, Watcher watcher)</p>
+<p> 参数说明:  </p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">参数名</th>
+<th align="center">类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">path</td>
+<td align="center">String</td>
+<td align="center">需要监听节点的路径节点的路径</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">watcher</td>
+<td align="center">Watcher</td>
+<td align="center">节点的监听程序</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Stat</td>
+<td align="center"></td>
+<td align="center">返回znode的状态</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<pre><code>WatcherEvent事件类型  
+序号 | 名称 |　int值　 |　说明　
+  :--: |  :----: | :----:  |  :--:    
+  0  | None | -1 | 无事件
+  1  | NodeCreated | 1 | 节点创建事件
+  2  | NodeDeleted | 2 | 节点删除事件
+  3  | NodeDataChanged | 3 | 节点数据变化事件
+  4  | NodeChildrenChanged | 4 | 节点的子节点变化事件
+  5  | DataWatchRemoved | 5 | 节点数据监视器移除事件
+  6  | ChildWatchRemoved | 6 |  子节点监视器移除事件</code></pre><ol start="2">
+<li><p>代码实现</p>
+<ul>
+<li><p>监听器类  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZkListener</span> <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">  <span class="comment">//监听到内容后的动作</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent event)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/***</span></span><br><span class="line"><span class="comment">    * do something</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">  </span><br><span class="line">   System.out.println(event.getState());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册监听器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//zookeeper连接器</span></span><br><span class="line">ZookeeperClient client = <span class="keyword">new</span> ZookeeperClient();</span><br><span class="line"><span class="comment">//获取zookeeper连接实例</span></span><br><span class="line">Zookeeper zookeeper = client.getInstance();</span><br><span class="line"><span class="comment">//实例化连接器</span></span><br><span class="line">ZkListener listener = <span class="keyword">new</span> ZkListener();</span><br><span class="line"><span class="comment">//对指定的路径注册监听器</span></span><br><span class="line">zk.exists(<span class="string">"/zk-test"</span>, listener);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="涉及技术名词"><a href="#涉及技术名词" class="headerlink" title="涉及技术名词"></a>涉及技术名词</h2><ol>
 <li>FLP impossibillity</li>
 <li>total order / partial order / causal order</li>
 <li>CAP定理</li>
