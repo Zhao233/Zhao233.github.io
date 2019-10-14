@@ -188,6 +188,120 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-数据库连接池简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/14/数据库连接池简介/">数据库连接池简介</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/14/数据库连接池简介/" class="archive-article-date">
+  	<time datetime="2019-10-14T06:28:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是数据库连接池"><a href="#什么是数据库连接池" class="headerlink" title="什么是数据库连接池"></a>什么是数据库连接池</h2><pre><code>数据库连接池是负责分配，管理，释放数据库连接，允许应用程序反复使用一个现有的数据库连接，而不需要重新建立一个连接。</code></pre><h2 id="为什么使用数据库连接池"><a href="#为什么使用数据库连接池" class="headerlink" title="为什么使用数据库连接池"></a>为什么使用数据库连接池</h2><ol>
+<li>不使用数据库连接池的数据库执行流程</li>
+</ol>
+<ul>
+<li><p>TCP建立连接的三次握手（SYN SYN+ACK ACK）</p>
+</li>
+<li><p>MYSQL认证的三次握手（握手初始化 登录认证 认证结果）</p>
+</li>
+<li><p>sql执行（执行sql 返回结果）</p>
+</li>
+<li><p>MYSQL关闭连接</p>
+</li>
+<li><p>TCP关闭连接的四次握手</p>
+<p>  缺点：    </p>
+<ol>
+<li>网络io较多</li>
+<li>数据库负载较高</li>
+<li>应用频繁的创建连接和关闭连接导致临时对象较多，GC频繁</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>使用数据库连接池的数据库执行流程</li>
+</ol>
+<ul>
+<li><p>TCP建立连接的三次握手（SYN SYN+ACK ACK）</p>
+</li>
+<li><p>MYSQL认证的三次握手（握手初始化 登录认证 认证结果）</p>
+</li>
+<li><p>sql执行（执行sql 返回结果）</p>
+</li>
+<li><p>复用之前连接执行sql</p>
+<p>  优点：</p>
+<ol>
+<li>减少了网络开销</li>
+<li>提高系统性能</li>
+</ol>
+</li>
+</ul>
+<h2 id="使用数据库连接池时主要的参数"><a href="#使用数据库连接池时主要的参数" class="headerlink" title="使用数据库连接池时主要的参数"></a>使用数据库连接池时主要的参数</h2><ol>
+<li>最小连接数：连接池中一直保持连接的连接的数量</li>
+<li>最大连接数：连接池能申请的最大连接数量。如果请求的连接数超过这个数，后面的连接请求将加入到等待队列中。</li>
+<li>最大空闲时间：当超过这个时间没有向服务器发请求时，就会断开这个连接</li>
+<li>获取连接的超时时间</li>
+<li>超时重试连接次数</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><ol>
+<li>简单(配置信息不做动态处理)</li>
+<li>不做错误处理(假设信息都是对的)</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBPoolService</span></span>&#123;</span><br><span class="line">    <span class="comment">// 最大数据库连接数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">short</span> db_max_conn = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">short</span> db_min_conn = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据库服务器addr</span></span><br><span class="line">    <span class="keyword">private</span> String db_url = <span class="string">"test"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据库连接端口</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">short</span> db_port = <span class="number">3306</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据库名称</span></span><br><span class="line">    <span class="keyword">private</span> String db_name = <span class="string">"test"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据库登录用户名</span></span><br><span class="line">    <span class="keyword">private</span> String db_username = <span class="string">"root"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据库登录密码</span></span><br><span class="line">    <span class="keyword">private</span> String db_password = <span class="string">"root"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> HikariDataSource dataSource;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//初始化连接池</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span></span>&#123;</span><br><span class="line">        HikariConfig config = <span class="keyword">new</span> HikariConfig();</span><br><span class="line">        config.setMaximumPoolSize(db_max_conn);</span><br><span class="line">        config.setMinimumPoolSize(db_min_conn)</span><br><span class="line">        config.setDataSourceClassName(<span class="string">"com.mysql.jdbc.jdbc2.optional.MysqlDataSource"</span>);</span><br><span class="line">        config.addDataSourceProperty(<span class="string">"serverName"</span>, db_url);</span><br><span class="line">        config.addDataSourceProperty(<span class="string">"port"</span>, db_port);</span><br><span class="line">        config.addDataSourceProperty(<span class="string">"databaseName"</span>, db_name);</span><br><span class="line">        config.addDataSourceProperty(<span class="string">"user"</span>, db_username);</span><br><span class="line">        config.addDataSourceProperty(<span class="string">"password"</span>, db_password);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">this</span>.dataSource = <span class="keyword">new</span> HikariDataSource(config);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(dataSource == <span class="keyword">null</span>)&#123;</span><br><span class="line">                System.out.print(<span class="string">"连接池未初始化"</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//从连接池中获取结果集</span></span><br><span class="line">            <span class="keyword">return</span> dataSource.getConnection();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            dataSource.resumePool();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">stop</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        dataSource.close();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        DBPoolService dbPoolService = <span class="keyword">new</span> DBPoolService();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化数据库连接池</span></span><br><span class="line">        dbPoolService.start()</span><br><span class="line"></span><br><span class="line">        <span class="comment">// statement用来执行SQL语句</span></span><br><span class="line">        Statement statement = DBService.getInstance().getConnection().createStatement();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 要执行的SQL语句id和content是表review中的项。</span></span><br><span class="line">        String sql = <span class="string">"select * from login where name='Lovell' and password='123456'"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 得到结果</span></span><br><span class="line">        ResultSet rs = statement.executeQuery(sql);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(rs.next())&#123;</span><br><span class="line">            System.out.println(<span class="string">"Logon"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"Login Faild"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">            关闭结果集</span></span><br><span class="line"><span class="comment">            让java gc处理结果集</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        rs.close(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/14/数据库连接池简介/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-nohup重定向" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
