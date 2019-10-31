@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Everything Returns To Nothing">
 <meta property="og:description" content="什么是数据库连接池数据库连接池是负责分配，管理，释放数据库连接，允许应用程序反复使用一个现有的数据库连接，而不需要重新建立一个连接。为什么使用数据库连接池 不使用数据库连接池的数据库执行流程   TCP建立连接的三次握手（SYN SYN+ACK ACK）  MYSQL认证的三次握手（握手初始化 登录认证 认证结果）  sql执行（执行sql 返回结果）  MYSQL关闭连接  TCP关闭连接的四次">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-14T06:30:28.971Z">
+<meta property="og:updated_time" content="2019-10-31T07:06:54.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库连接池简介">
 <meta name="twitter:description" content="什么是数据库连接池数据库连接池是负责分配，管理，释放数据库连接，允许应用程序反复使用一个现有的数据库连接，而不需要重新建立一个连接。为什么使用数据库连接池 不使用数据库连接池的数据库执行流程   TCP建立连接的三次握手（SYN SYN+ACK ACK）  MYSQL认证的三次握手（握手初始化 登录认证 认证结果）  sql执行（执行sql 返回结果）  MYSQL关闭连接  TCP关闭连接的四次">
@@ -251,6 +251,11 @@
 </ol>
 </li>
 </ul>
+<h2 id="数据库连接池涉及的思想"><a href="#数据库连接池涉及的思想" class="headerlink" title="数据库连接池涉及的思想"></a>数据库连接池涉及的思想</h2><ol>
+<li>使用的资源及时释放<br> 在有限网络资源下，如果只建立而不释放，随着建立越来越多，网络越来越阻塞，则会严重影响系统性能。</li>
+<li>资源复用</li>
+<li>高内聚,低耦合<br> 执行对象只负责执行，而对连接的管理则交给一个统一的对象  </li>
+</ol>
 <h2 id="使用数据库连接池时主要的参数"><a href="#使用数据库连接池时主要的参数" class="headerlink" title="使用数据库连接池时主要的参数"></a>使用数据库连接池时主要的参数</h2><ol>
 <li>最小连接数：连接池中一直保持连接的连接的数量</li>
 <li>最大连接数：连接池能申请的最大连接数量。如果请求的连接数超过这个数，后面的连接请求将加入到等待队列中。</li>
