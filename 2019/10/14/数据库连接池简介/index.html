@@ -15,10 +15,12 @@
 <meta property="og:site_name" content="Everything Returns To Nothing">
 <meta property="og:description" content="什么是数据库连接池数据库连接池是负责分配，管理，释放数据库连接，允许应用程序反复使用一个现有的数据库连接，而不需要重新建立一个连接。为什么使用数据库连接池 不使用数据库连接池的数据库执行流程   TCP建立连接的三次握手（SYN SYN+ACK ACK）  MYSQL认证的三次握手（握手初始化 登录认证 认证结果）  sql执行（执行sql 返回结果）  MYSQL关闭连接  TCP关闭连接的四次">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-31T07:06:54.755Z">
+<meta property="og:image" content="http://yoursite.com/.com//process.jpg">
+<meta property="og:updated_time" content="2019-10-31T07:16:00.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库连接池简介">
 <meta name="twitter:description" content="什么是数据库连接池数据库连接池是负责分配，管理，释放数据库连接，允许应用程序反复使用一个现有的数据库连接，而不需要重新建立一个连接。为什么使用数据库连接池 不使用数据库连接池的数据库执行流程   TCP建立连接的三次握手（SYN SYN+ACK ACK）  MYSQL认证的三次握手（握手初始化 登录认证 认证结果）  sql执行（执行sql 返回结果）  MYSQL关闭连接  TCP关闭连接的四次">
+<meta name="twitter:image" content="http://yoursite.com/.com//process.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Everything Returns To Nothing" type="application/atom+xml">
   
@@ -223,8 +225,6 @@
 <li><p>MYSQL关闭连接</p>
 </li>
 <li><p>TCP关闭连接的四次握手</p>
-<a id="more"></a>
-
 <p>  缺点：    </p>
 <ol>
 <li>网络io较多</li>
@@ -233,6 +233,8 @@
 </ol>
 </li>
 </ul>
+<a id="more"></a>
+
 <ol start="2">
 <li>使用数据库连接池的数据库执行流程</li>
 </ol>
@@ -251,6 +253,7 @@
 </ol>
 </li>
 </ul>
+<p><img src="/.com//process.jpg" alt="sql语句执行过程"></p>
 <h2 id="数据库连接池涉及的思想"><a href="#数据库连接池涉及的思想" class="headerlink" title="数据库连接池涉及的思想"></a>数据库连接池涉及的思想</h2><ol>
 <li>使用的资源及时释放<br> 在有限网络资源下，如果只建立而不释放，随着建立越来越多，网络越来越阻塞，则会严重影响系统性能。</li>
 <li>资源复用</li>
@@ -361,6 +364,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/10/31/测试页面/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          测试页面
+        
+      </div>
+    </a>
   
   
     <a href="/2019/10/07/nohup重定向/" id="article-nav-older" class="article-nav-link-wrap">
