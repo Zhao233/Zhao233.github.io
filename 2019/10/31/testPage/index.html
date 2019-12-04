@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>testPage | Everything Returns To Nothing</title>
+  <title>zookeeper讲解过程 | Everything Returns To Nothing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="testPage">
+  <meta name="description" content="zookeeper1. 集群1.1 为什么要用集群 高可用    高性能    负载均衡 负载均衡1.2 使用集群带来的问题   对集群的管理的困难（动态拓展[节点发现]，节点状态监控，任务转移，leader的选举） 信息更新的困难（更新所有节点的信息） 对集群中节点的同步协调实现的困难（数据一致性，锁服务，优先队列）   2. zookeeper介绍2.1 zookeeper是什么 一个独立的，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zookeeper讲解过程">
 <meta property="og:url" content="http://yoursite.com/2019/10/31/testPage/index.html">
 <meta property="og:site_name" content="Everything Returns To Nothing">
+<meta property="og:description" content="zookeeper1. 集群1.1 为什么要用集群 高可用    高性能    负载均衡 负载均衡1.2 使用集群带来的问题   对集群的管理的困难（动态拓展[节点发现]，节点状态监控，任务转移，leader的选举） 信息更新的困难（更新所有节点的信息） 对集群中节点的同步协调实现的困难（数据一致性，锁服务，优先队列）   2. zookeeper介绍2.1 zookeeper是什么 一个独立的，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/.com//process.jpg">
-<meta property="og:updated_time" content="2019-10-31T07:24:43.212Z">
+<meta property="og:updated_time" content="2019-12-04T07:10:17.935Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="testPage">
-<meta name="twitter:image" content="http://yoursite.com/.com//process.jpg">
+<meta name="twitter:title" content="zookeeper讲解过程">
+<meta name="twitter:description" content="zookeeper1. 集群1.1 为什么要用集群 高可用    高性能    负载均衡 负载均衡1.2 使用集群带来的问题   对集群的管理的困难（动态拓展[节点发现]，节点状态监控，任务转移，leader的选举） 信息更新的困难（更新所有节点的信息） 对集群中节点的同步协调实现的困难（数据一致性，锁服务，优先队列）   2. zookeeper介绍2.1 zookeeper是什么 一个独立的，">
   
     <link rel="alternative" href="/atom.xml" title="Everything Returns To Nothing" type="application/atom+xml">
   
@@ -196,7 +197,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      testPage
+      zookeeper讲解过程
     </h1>
   
 
@@ -209,7 +210,63 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/.com//process.jpg" alt="sql语句执行过程"></p>
+        <h1 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h1><h2 id="1-集群"><a href="#1-集群" class="headerlink" title="1. 集群"></a>1. 集群</h2><h3 id="1-1-为什么要用集群"><a href="#1-1-为什么要用集群" class="headerlink" title="1.1 为什么要用集群"></a>1.1 为什么要用集群</h3><ol>
+<li>高可用   </li>
+<li>高性能   </li>
+<li>负载均衡<ul>
+<li>负载均衡<h3 id="1-2-使用集群带来的问题"><a href="#1-2-使用集群带来的问题" class="headerlink" title="1.2 使用集群带来的问题"></a>1.2 使用集群带来的问题</h3></li>
+</ul>
+</li>
+<li>对集群的管理的困难（动态拓展[节点发现]，节点状态监控，任务转移，leader的选举）</li>
+<li>信息更新的困难（更新所有节点的信息）</li>
+<li>对集群中节点的同步协调实现的困难（数据一致性，锁服务，优先队列） </li>
+</ol>
+<h2 id="2-zookeeper介绍"><a href="#2-zookeeper介绍" class="headerlink" title="2. zookeeper介绍"></a>2. zookeeper介绍</h2><h3 id="2-1-zookeeper是什么"><a href="#2-1-zookeeper是什么" class="headerlink" title="2.1 zookeeper是什么"></a>2.1 zookeeper是什么</h3><ol>
+<li>一个独立的，分布式协调软件</li>
+</ol>
+<h3 id="2-2-为什么需要zookeeper"><a href="#2-2-为什么需要zookeeper" class="headerlink" title="2.2 为什么需要zookeeper"></a>2.2 为什么需要zookeeper</h3><ol>
+<li>将一些与业务无关的功能独立出来，让开发者更注重具体的业务实现（与所有的框架都类似）</li>
+</ol>
+<h3 id="2-3-zookeeper解决了什么问题"><a href="#2-3-zookeeper解决了什么问题" class="headerlink" title="2.3 zookeeper解决了什么问题"></a>2.3 zookeeper解决了什么问题</h3><ol>
+<li>对集群的管理 <ul>
+<li>对设备连接情况的监听（包括新加入的，已连接的，已连接断开的）</li>
+</ul>
+</li>
+<li>信息更新 <ul>
+<li>所有信息都放置于 “一点” ，只需更新一个，其它机器内信息也会自动更新</li>
+</ul>
+</li>
+<li>分布式协调<ul>
+<li>（利用zookeeper实现，并非自带功能）</li>
+<li>分布式互斥锁</li>
+<li>“并发包”的分布式实现（Barrier和Queue）<h3 id="2-4-功能"><a href="#2-4-功能" class="headerlink" title="2.4 功能"></a>2.4 功能</h3></li>
+</ul>
+</li>
+<li>命名服务<ul>
+<li>将资源挂载到一个唯一的路径上（为什么会不唯一的原因）</li>
+</ul>
+</li>
+<li>配置管理<ul>
+<li>2.3提到的信息更新</li>
+</ul>
+</li>
+<li>分布式并行<ul>
+<li>2.3提到的分布式协调</li>
+</ul>
+</li>
+<li>集群服务<ul>
+<li>2.3 提到的对集群的管理</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-5-原理概述"><a href="#2-5-原理概述" class="headerlink" title="2.5 原理概述"></a>2.5 原理概述</h3><ol>
+<li>分布式树形文件系统</li>
+<li>读写操作<ul>
+<li>zookeeper集群角色</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-zookeeper用途"><a href="#3-zookeeper用途" class="headerlink" title="3. zookeeper用途"></a>3. zookeeper用途</h2><h3 id="3-1-kafka"><a href="#3-1-kafka" class="headerlink" title="3.1 kafka"></a>3.1 kafka</h3><h3 id="3-2-hbase"><a href="#3-2-hbase" class="headerlink" title="3.2 hbase"></a>3.2 hbase</h3><h3 id="3-3-dubbo"><a href="#3-3-dubbo" class="headerlink" title="3.3 dubbo"></a>3.3 dubbo</h3><p>用老板和秘书举例子<br>为什么使用zookeeper集群，提高“秘书”的健壮性，高可用和高性能<br>数据一致性</p>
 
       
 
